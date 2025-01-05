@@ -1,0 +1,138 @@
+/* General Page Styling */
+.signup-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #fff4eb;
+}
+
+/* Main Container */
+.signup-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 15px;
+  width: 95%;
+  margin-top: 60px;
+  gap: 250px;
+}
+
+/* Logo Section */
+.logo-section {
+  flex: 1;
+  text-align: center;
+  padding-left: 100px;
+  max-width: 400px; /* Limit logo size on wider screens */
+}
+
+.logo-large {
+  width: 400px;
+  height: auto;
+}
+
+/* Sign Up Section */
+.signup-section {
+  flex: 1;
+  padding: 17px;
+  background-color: #fffcf9;
+  margin-right: 100px;
+  border-radius: 15px;
+  margin-top: 25px;
+  /* margin: 8px; */
+  height: 560px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.signup-section h3 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.signup-section h2 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  width: 98%;
+}
+
+.signup-form label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+.signup-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.signup-form .signup-submit {
+  padding: 10px;
+  background-color: #ff7f45;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.signup-form .signup-submit:hover {
+  background-color: #ff5200;
+}
+
+.signup-links {
+  margin-top: 10px;
+  text-align: center;
+  width: 100%;
+  font-size: 14px;
+}
+
+.signup-links a {
+  color: #ff7f45;
+  text-decoration: none;
+}
+
+.signup-links a:hover {
+  text-decoration: underline;
+}
+
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 2.5rem; /* Add space for the icon */
+  height: 40px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.toggle-visibility {
+  position: absolute;
+  right: 10px; /* Position it inside the input field */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #888;
+}
+
+.toggle-visibility:hover {
+  color: #555;
+}

@@ -1,0 +1,160 @@
+.user-profile-container {
+  position: relative;
+}
+
+.user-profile {
+  cursor: pointer;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 280px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  padding: 12px 0;
+  z-index: 1000;
+}
+
+.profile-section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px 12px 16px;
+}
+
+.profile-icon-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-placeholder-icon {
+  font-size: 40px;
+  color: #ccc;
+}
+
+.profile-text {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  gap: 2px;
+}
+
+.username {
+  font-size: 16px;
+  font-weight: 500;
+  color: #000;
+}
+
+.visit-profile {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 0;
+}
+
+.menu-item {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 16px;
+  color: #000;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background-color: #f8f9fa;
+}
+
+.logout-section {
+  padding: 0 16px;
+  margin-top: 12px;
+}
+
+.logout-button {
+  width: 100%;
+  background-color: #ffc107;
+  border: none;
+  border-radius: 25px;
+  padding: 10px;
+  color: #000;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logout-button i {
+  font-size: 16px;
+}
+
+/* Add to your MainHeader.css */
+.header-right .icon {
+  position: relative;
+  font-size: 20px;
+  color: #333;
+  margin: 0 15px;
+  cursor: pointer;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #ff0000;
+  color: white;
+  font-size: 12px;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  font-weight: bold;
+  border: 2px solid white;
+  animation: pulse 2s infinite;
+}
+
+/* Add a subtle pulse animation for the badge */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Optional: Add hover effects */
+.header-right .icon:hover {
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.notification-badge:hover {
+  animation: none;
+}

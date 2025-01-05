@@ -1,0 +1,525 @@
+/* StartPage.css */
+
+.homepage {
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f3ed;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  padding-top: 75px; /* Adjust for header height */
+  overflow: hidden;
+}
+
+.categories {
+  width: 20%;
+  background-color: #f9f3ed; /* Solid background for the entire section */
+  border-right: 1px solid #ddd;
+  padding: 0; /* Ensure no extra padding causes gaps */
+  overflow-y: auto;
+  flex-shrink: 0;
+  height: calc(70vh - 50px); /* Fixed height for independent scrolling */
+  position: sticky;
+  z-index: 1; /* Ensure it stays below the header */
+}
+
+.categories h3 {
+  font-size: 18px;
+  font-weight: bold;
+  position: sticky; /* Keeps the heading fixed at the top of the section */
+  top: 0; /* Ensures the heading aligns properly with the top of the scrolling area */
+  background-color: #f9f3ed; /* Solid background to cover scrolling items */
+  z-index: 2; /* Ensure it's above the list content */
+  padding: 10px; /* Proper padding for consistent spacing */
+  border-bottom: 1px solid #ddd; /* Optional: add a divider for better visual separation */
+}
+
+.categories::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+.categories ul {
+  list-style: none;
+  padding: 0;
+  overflow: visible;
+}
+
+.categories ul li {
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  white-space: nowrap; /* Prevent text wrapping */
+  border-bottom: 1px solid #ddd; /* Add a line below each category item */
+}
+
+.categories ul li::after {
+  content: ">"; /* Unicode for '>' symbol */
+  color: #aaa;
+  font-size: 14px;
+  margin-left: auto; /* Ensure it stays on the right side */
+  margin-right: 12px; /* Adjust for spacing */
+}
+
+.categories ul li:hover {
+  color: #ff7f45;
+}
+
+.categories ul li:before {
+  content: "\2022";
+  font-size: 14px;
+  color: #ccc;
+}
+
+.categories li {
+  padding: 10px;
+  transition: background-color 0.3s;
+}
+
+.categories li:hover {
+  background-color: #f0f0f0;
+}
+
+.categories li.active {
+  background-color: #e0e0e0;
+  font-weight: bold;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+.products-grid .item img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.products-grid .item h4 {
+  font-size: 14px;
+  margin: 10px 0;
+  text-align: center;
+  color: #333;
+}
+
+.products-grid .item p {
+  font-size: 12px;
+  text-align: center;
+  color: #777;
+  margin: 5px 0;
+}
+
+.category-products {
+  width: 100%;
+}
+
+.category-products h3 {
+  padding: 20px;
+  margin: 0;
+  border-bottom: 1px solid #eee;
+}
+
+.item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.upload-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.head {
+  margin-top: 30px;
+}
+
+.head-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  margin-left: 300px;
+  margin-top: -425px;
+}
+
+.top-categories {
+  margin-bottom: 20px;
+}
+
+.top-categories h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 9px;
+  padding: 5px;
+  border-bottom: 1px solid #ddd; /* Add a line below each category item */
+}
+
+.categories-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  padding-bottom: 10px; /* Add space for better scroll visibility */
+  white-space: nowrap; /* Prevent buttons from stacking */
+  border-bottom: 1px solid #ddd; /* Add a line below each category item */
+}
+
+.categories-buttons button {
+  padding: 10px 15px;
+  background-color: #ffe4d4;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.categories-buttons button:hover {
+  background-color: #ff7f45;
+  color: #fff;
+}
+
+.trending {
+  margin-top: -44px;
+}
+
+.trending h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  margin-top: 8px;
+  padding: 5px;
+  border-bottom: 1px solid #ddd; /* Add a line below each category item */
+}
+
+.trending-items {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+.trending-items .item {
+  flex: 0 0 200px;
+  background-color: #f9f3ed;
+  padding: 10px;
+  border: 1px solid #d0d0d0;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.trending-items .item img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.trending-items .item h4 {
+  font-size: 14px;
+  margin: 10px 0;
+  color: #333;
+}
+
+.trending-items .item p {
+  font-size: 12px;
+  color: #777;
+  margin: 5px 0;
+}
+
+/* .latest-uploads {
+  margin-top: 20px;
+} */
+
+.uploads-sections {
+  padding-right: 100px; /* Adjusts the padding for a more balanced layout */
+}
+
+.latest-uploads {
+  flex-wrap: wrap;
+  gap: 35px;
+  justify-content: flex-start;
+  padding: 20px 0;
+}
+
+.latest-uploads .upload-item {
+  flex: 0 0 200px;
+  background-color: #f9f3ed;
+  padding: 10px;
+  border: 1px solid #d0d0d0;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.latest-uploads .upload-item img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.latest-uploads .upload-item h4 {
+  font-size: 14px;
+  margin: 10px 0;
+  color: #333;
+}
+
+.latest-uploads .upload-item p {
+  font-size: 12px;
+  color: #777;
+  margin: 5px 0;
+}
+
+.recommendations {
+  margin-top: 20px;
+}
+
+.recommendations h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.recommendations .recommendation-item {
+  display: flex;
+  gap: 15px;
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px; /* Add spacing between recommendation items */
+}
+
+.recommendations .recommendation-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.recommendations .recommendation-item div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.recommendations .recommendation-item h4 {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.recommendations .recommendation-item p {
+  font-size: 14px;
+  color: #777;
+  margin: 0;
+}
+
+.uploads-tabs {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd; /* Add a separator line */
+  position: relative;
+}
+
+.uploads-tabs .tab {
+  flex: 1;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #555;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+.uploads-tabs .tab:hover {
+  color: #ff7f45;
+}
+
+.uploads-tabs .tab.active {
+  color: #ff7f45;
+  border-bottom: 3px solid #ff7f45; /* Highlight active button */
+  background: transparent;
+}
+.uploads-section {
+  padding-right: 500px; /* Adjusts the padding for a more balanced layout */
+}
+
+/* Add these media queries at the end of your existing StartPage.css file */
+
+@media screen and (max-width: 1200px) {
+  .head-content {
+    margin-left: 250px;
+    max-width: calc(100% - 270px);
+  }
+
+  .uploads-sections {
+    padding-right: 20px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .head-content {
+    margin-left: 220px;
+    margin-top: -425px;
+    max-width: calc(100% - 240px);
+  }
+
+  .categories {
+    width: 200px;
+  }
+
+  .trending-items .item {
+    flex: 0 0 160px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .head {
+    flex-direction: column;
+    margin-top: 0;
+  }
+
+  .categories {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .head-content {
+    margin-left: 0;
+    margin-top: 0;
+    max-width: 100%;
+    padding: 0 15px;
+  }
+
+  .categories-buttons {
+    padding-bottom: 15px;
+  }
+
+  .categories-buttons button {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  .trending-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+  }
+
+  .trending-items .item {
+    flex: none;
+    width: 100%;
+  }
+
+  .latest-uploads {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+  }
+
+  .latest-uploads .upload-item {
+    flex: none;
+    width: 100%;
+  }
+
+  .carousel-caption {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .homepage {
+    padding-top: 60px;
+  }
+
+  .categories {
+    max-height: 180px;
+  }
+
+  .categories ul li {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+
+  .top-categories h3,
+  .trending h3 {
+    font-size: 16px;
+  }
+
+  .categories-buttons button {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .trending-items {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+  }
+
+  .latest-uploads {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+  }
+
+  .uploads-tabs .tab {
+    font-size: 13px;
+    padding: 8px 0;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+    padding: 10px;
+  }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) {
+  .categories ul li:hover {
+    background-color: transparent;
+    color: inherit;
+  }
+
+  .item:hover,
+  .upload-item:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .categories-buttons button:hover {
+    background-color: #ffe4d4;
+    color: inherit;
+  }
+}
+
+/* Fix for iOS Safari 100vh issue */
+@supports (-webkit-touch-callout: none) {
+  .categories {
+    height: calc(70vh - 50px);
+  }
+}
