@@ -1,9 +1,10 @@
-import React from "react";
+import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Header.css";
 
-const Header = () => {
+const Header = ({ onSearch }) => {
   const navigate = useNavigate();
+  const [searchInput, setSearchInput] = useState("");
 
   const handleNavigation = (path) => {
     navigate(path);
@@ -18,6 +19,18 @@ const Header = () => {
     }
   };
 
+  const giveSearch = () => {
+    console.log(
+      "handleSearch triggered in MainHeader with input:",
+      searchInput
+    ); // Debug log
+    if (onSearch && typeof onSearch === "function") {
+      onSearch(searchInput); // Pass search query to parent
+    } else {
+      console.error("Search query:", onSearch);
+      console.error("onSearch is not defined or is not a function");
+    }
+  };
   return (
     <header className="header">
       <div className="header-left">
@@ -30,8 +43,16 @@ const Header = () => {
           type="text"
           className="search-input"
           placeholder="Search for anything"
+          onChange={(e) => setSearchInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              giveSearch();
+            }
+          }}
         />
-        <button className="search-button">🔍</button>
+        <button className="search-button" onClick={giveSearch}>
+          🔍
+        </button>
       </div>
       <div className="header-right">
         <button className="post-button" onClick={handlePostForFree}>

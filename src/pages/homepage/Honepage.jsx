@@ -3,9 +3,12 @@ import Header from "../../components/MainHeader";
 import { getAllProductsApi, fetchProductsByCategoryApi } from "../../apis/Api";
 import { useNavigate } from "react-router-dom";
 import "./Homepage.css";
+import { searchProducts } from "../../apis/Api";
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
   const [activeTab, setActiveTab] = useState("latest");
   const [latestProducts, setLatestProducts] = useState([]);
   const [trendingProducts, setTrendingProducts] = useState([]);
@@ -77,9 +80,28 @@ const HomePage = () => {
     fetchProducts();
   }, []);
 
+  const handleSearch = async (query) => {
+    console.log("handleSearch called with query:", query); // Debug log
+    setSearchQuery(query);
+
+    if (query.trim()) {
+      try {
+        const response = await searchProducts(query);
+        console.log("Search API Response:", response); // Debug log
+        setSearchResults(response.products || response);
+      } catch (error) {
+        console.error("Error fetching search results:", error);
+        setSearchResults([]);
+      }
+    } else {
+      console.log("Clearing search results");
+      setSearchResults([]); // Clear results if no query
+    }
+  };
+
   return (
     <div className="homepage">
-      <Header />
+      <Header onSearch={handleSearch} />
       <div
         id="carouselExampleCaptions"
         className="carousel slide"
@@ -173,7 +195,42 @@ const HomePage = () => {
           </ul>
         </aside>
         <main className="head-content">
-          {selectedCategory ? (
+          {searchQuery ? (
+            <section className="search-results">
+              <h3>Search Results for "{searchQuery}"</h3>
+              <div className="products-grid">
+                {searchResults.length > 0 ? (
+                  searchResults.map((product) => (
+                    <div
+                      className="item"
+                      key={product._id || product.id}
+                      onClick={() =>
+                        handleProductClick(product._id || product.id)
+                      }
+                    >
+                      <img
+                        src={
+                          product.productImage
+                            ? `http://localhost:3030/public/products/${product.productImage}`
+                            : "/assets/default-product.png"
+                        }
+                        alt={product.productName}
+                        onError={(e) => {
+                          e.target.src = "/assets/default-product.png";
+                          e.target.onerror = null;
+                        }}
+                      />
+                      <h4>{product.productName}</h4>
+                      <p>{product.productCondition || "New"}</p>
+                      <p>Rs. {product.productPrice?.toLocaleString()}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p>No products found</p>
+                )}
+              </div>
+            </section>
+          ) : selectedCategory ? (
             <section className="category-products">
               <h3>{selectedCategory}</h3>
               <div className="products-grid">
@@ -301,24 +358,29 @@ const HomePage = () => {
                   )}
 
                   {activeTab === "recommended" && (
-                    <div className="recommendations">
-                      <h3>Recommended</h3>
-                      <div className="recommendation-item">
-                        <img src="/assets/logo.png" alt="Gaming Chair" />
-                        <div>
-                          <h4>Gaming Chair</h4>
-                          <p>Rs. 15,000</p>
-                          <p>Like New</p>
-                        </div>
-                      </div>
-                      <div className="recommendation-item">
-                        <img src="/assets/logo.png" alt="Smartphone" />
-                        <div>
-                          <h4>Smartphone</h4>
-                          <p>Rs. 35,000</p>
-                          <p>Brand New</p>
-                        </div>
-                      </div>
+                    <div className="latest-uploads">
+                      {/* <h3>Latest Uploads</h3> */}
+                      {isLoading ? (
+                        <p>Loading...</p>
+                      ) : (
+                        latestProducts.map((product) => (
+                          <div
+                            className="upload-item"
+                            key={product._id}
+                            onClick={() => handleProductClick(product._id)}
+                          >
+                            <img
+                              src={`http://localhost:3030/public/products/${product.productImage}`}
+                              alt={product.productName}
+                            />
+                            <div>
+                              <h4>{product.productName}</h4>
+                              <p>Rs. {product.productPrice}</p>
+                              <p>{product.productCondition}</p>
+                            </div>
+                          </div>
+                        ))
+                      )}
                     </div>
                   )}
                 </div>

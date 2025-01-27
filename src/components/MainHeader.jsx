@@ -8,8 +8,11 @@ import {
 } from "../pages/messagenotification/MessagePopup";
 import ChatPopup from "../pages/chatpage/ChatPopup";
 import { socketService } from "../services/socketService";
+import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ onSearch }) => {
+  const navigate = useNavigate();
+  const [searchInput, setSearchInput] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMessagesPopupOpen, setIsMessagesPopupOpen] = useState(false);
   const [isNotificationsPopupOpen, setIsNotificationsPopupOpen] =
@@ -26,6 +29,18 @@ const Header = () => {
     (notif) => notif.unread
   ).length;
 
+  const giveSearch = () => {
+    console.log(
+      "handleSearch triggered in MainHeader with input:",
+      searchInput
+    ); // Debug log
+    if (onSearch && typeof onSearch === "function") {
+      onSearch(searchInput); // Pass search query to parent
+    } else {
+      console.error("Search query:", onSearch);
+      console.error("onSearch is not defined or is not a function");
+    }
+  };
   // Initialize user data
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -112,6 +127,10 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const handleRedirect = () => {
+    navigate("/support");
+  };
+
   return (
     <>
       <header className="header">
@@ -126,8 +145,15 @@ const Header = () => {
             type="text"
             className="search-input"
             placeholder="Search for anything"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                giveSearch();
+              }
+            }}
           />
-          <button className="search-button">
+          <button className="search-button" onClick={giveSearch}>
             <i className="fa fa-search"></i>
           </button>
         </div>
@@ -220,7 +246,9 @@ const Header = () => {
                   </div>
                 </div>
                 <hr />
-                <button className="menu-item">Contact Support</button>
+                <button className="menu-item" onClick={handleRedirect}>
+                  Contact Support
+                </button>
                 <div className="logout-section">
                   <button onClick={handleLogout} className="logout-button">
                     <i className="fas fa-sign-out-alt"></i>

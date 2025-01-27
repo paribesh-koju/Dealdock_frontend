@@ -422,3 +422,16 @@ export const verifyOtpApi = async (data) => {
     throw error;
   }
 };
+
+// Search products by name without pagination
+export const searchProducts = async (searchQuery = "") => {
+  try {
+    const response = await axios.get(
+      `${API_URL}/api/products/search_products?search=${searchQuery}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error searching products:", error);
+    throw error;
+  }
+};

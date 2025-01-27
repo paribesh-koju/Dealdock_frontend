@@ -3,9 +3,12 @@ import Header from "../../components/Header";
 import { getAllProductsApi, fetchProductsByCategoryApi } from "../../apis/Api";
 import { useNavigate } from "react-router-dom";
 import "./Startpage.css";
+import { searchProducts } from "../../apis/Api";
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
   const [activeTab, setActiveTab] = useState("latest");
   const [latestProducts, setLatestProducts] = useState([]);
   const [trendingProducts, setTrendingProducts] = useState([]);
@@ -77,9 +80,28 @@ const HomePage = () => {
     fetchProducts();
   }, []);
 
+  const handleSearch = async (query) => {
+    console.log("handleSearch called with query:", query); // Debug log
+    setSearchQuery(query);
+
+    if (query.trim()) {
+      try {
+        const response = await searchProducts(query);
+        console.log("Search API Response:", response); // Debug log
+        setSearchResults(response.products || response);
+      } catch (error) {
+        console.error("Error fetching search results:", error);
+        setSearchResults([]);
+      }
+    } else {
+      console.log("Clearing search results");
+      setSearchResults([]); // Clear results if no query
+    }
+  };
+
   return (
     <div className="homepage">
-      <Header />
+      <Header onSearch={handleSearch} />
       <div
         id="carouselExampleCaptions"
         className="carousel slide"
@@ -173,7 +195,42 @@ const HomePage = () => {
           </ul>
         </aside>
         <main className="head-content">
-          {selectedCategory ? (
+          {searchQuery ? (
+            <section className="search-results">
+              <h3>Search Results for "{searchQuery}"</h3>
+              <div className="products-grid">
+                {searchResults.length > 0 ? (
+                  searchResults.map((product) => (
+                    <div
+                      className="item"
+                      key={product._id || product.id}
+                      onClick={() =>
+                        handleProductClick(product._id || product.id)
+                      }
+                    >
+                      <img
+                        src={
+                          product.productImage
+                            ? `http://localhost:3030/public/products/${product.productImage}`
+                            : "/assets/default-product.png"
+                        }
+                        alt={product.productName}
+                        onError={(e) => {
+                          e.target.src = "/assets/default-product.png";
+                          e.target.onerror = null;
+                        }}
+                      />
+                      <h4>{product.productName}</h4>
+                      <p>{product.productCondition || "New"}</p>
+                      <p>Rs. {product.productPrice?.toLocaleString()}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p>No products found</p>
+                )}
+              </div>
+            </section>
+          ) : selectedCategory ? (
             <section className="category-products">
               <h3>{selectedCategory}</h3>
               <div className="products-grid">
